@@ -1,0 +1,35 @@
+Miglioriamo ancora EpiBooks In questo esercizio applicherai le tue nuove
+conoscenze sull’elevazione dello stato e del lifecycle del componente per
+migliorare il tuo progetto. Fai un refactor della struttura del tuo componente
+BookList: dovranno esserci due colonne. Una a sinistra contenente la griglia con
+i libri e una sulla destra con il componente CommentArea. Entrambi dovranno
+essere sempre visibili. Se inizialmente nessun libro è selezionato,
+il CommentArea non deve mostrare alcun contenuto, oppure mostrare un avviso.
+Elimina CommentArea dal componente SingleBook.Quando un libro sulla sinistra
+viene selezionato, il suo codice asin dovrà essere salvato nello stato del
+componente principale; in questo modo potrà essere passato giù
+al CommentArea via prop. Quando CommentArea rileva un nuovo valore di asin con
+il metodo componentDidUpdate(), dovrà effettuare un fetch per ricevere i
+commenti che verranno poi visualizzati.[EXTRA] Il click sul
+componente SingleBook dovrà rappresentare un singolo libro selezionato alla
+volta per essere coerente con i commenti visualizzati sulla destra. Sarà quindi
+necessario modificare la funzionalità che permette al bordo della Card di
+diventare rosso, non più utilizzando uno stato interno, ma andando a comparare
+il valore dell’asin dello stato esterno con il suo asin personale. Se
+corrisponde, solo in quel caso il bordo diventerà rosso. Hai un endpoint CRUD
+per i commenti su: https://striveschool-api.herokuapp.com/api/comments/ Questo
+significa che puoi fare il GET, DELETE, POST, PUT dei dati con quello. !!!
+IMPORTANTE !!! Dovrai usare i tuoi Authentication headers(prendi un nuovo token
+da https://strive.school/studentlogin se quello precedente ti è scaduto) Un
+oggetto per il commento sarà strutturato in questo modo: {  "comment": string 
+"rate": string,  "elementId": string} Dove: comment è il testo del commento
+inserito dall’utenterate è un valore da 1 a 5elementId è la risorsa id/asin
+Esempio:{  "comment": "Ottimo film! :)",  "rate": "5",  "elementId":
+"tt0241527"}  WARNING  Fare una GET
+su https://striveschool-api.herokuapp.com/api/comments/ ti darà TUTTI i commenti
+nel database. Probabilmente sei più interessato a ricevere i commenti di un
+singolo libro/film alla volta: per far ciò dovrai specificare l’id/asin della
+risorsa nel tuo
+URL:https://striveschool-api.herokuapp.com/api/comments/:elementId Esempio:
+https://striveschool-api.herokuapp.com/api/comments/tt0241527 ritornerà tutti i
+commenti si un singolo film
