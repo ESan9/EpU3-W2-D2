@@ -2,7 +2,6 @@ import { Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
 const AddComment = (props) => {
-  console.log(props);
   const [comment, setComment] = useState({
     comment: "",
     rate: 1,
