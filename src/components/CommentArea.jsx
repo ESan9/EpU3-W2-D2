@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 // Componente CommentArea che riceve asin come prop (codice del libro)
-const CommentArea = (props) => {
+const CommentArea = ({ asin }) => {
   // Stato per i commenti caricati
   const [comments, setComments] = useState([]);
   // Stato che indica se il caricamento è in corso
@@ -18,7 +18,7 @@ const CommentArea = (props) => {
   // Funzione asincrona che effettua il fetch dei commenti relativi all'asin ricevuto
   const fetchComments = async () => {
     // Se asin non è presente, esce senza fare nulla
-    if (!props.asin) return;
+    if (!asin) return;
 
     // Imposta lo stato di caricamento e resetta eventuali errori precedenti
     setIsLoading(true);
@@ -27,7 +27,7 @@ const CommentArea = (props) => {
     try {
       // Effettua la richiesta GET per ottenere i commenti relativi all'asin
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" + props.asin,
+        "https://striveschool-api.herokuapp.com/api/comments/" + asin,
         {
           headers: {
             Authorization:
@@ -58,7 +58,7 @@ const CommentArea = (props) => {
     fetchComments(); // chiama la funzione per caricare i commenti
     // disabilita l'avviso ESLint per le dipendenze mancanti (in questo caso va bene così)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.asin]);
+  }, [asin]);
 
   // Render del componente
   return (
@@ -68,7 +68,7 @@ const CommentArea = (props) => {
       {/* Mostra il componente Error se c'è stato un errore nel fetch */}
       {isError && <Error />}
       {/* Componente per aggiungere un nuovo commento: riceve l'asin corrente */}
-      <AddComment asin={props.asin} />
+      <AddComment asin={asin} />
       {/* Componente per mostrare la lista dei commenti ricevuti dal server */}
       <CommentList commentsToShow={comments} />
     </div>
